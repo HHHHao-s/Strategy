@@ -1,0 +1,13 @@
+//@version=6
+strategy("Market order strategy", overlay = true, process_orders_on_close=true)
+
+if(year > 2018 and not barstate.islastconfirmedhistory)
+    strategy.order("Buy", strategy.long, qty=100000000000/close)
+
+if (barstate.islastconfirmedhistory)
+    strategy.close("Buy","sell all")
+
+// if(index == 1)
+//     strategy.entry("Short", strategy.short, 1)
+
+    

@@ -14,7 +14,7 @@ class Interval(Enum):
     
 start_date = "2018-12-01"
 end_date = "2024-12-01"
-interval = Interval.MONTHLY
+interval = Interval.WEEKLY
 amount = 100
 outputs = []
 tickers = ["QQQ", "QLD", "TQQQ", "VOO", "SSO", "UPRO"]
@@ -97,7 +97,8 @@ for output, color in zip(outputs, colors):
     display_combine(output, ax_combine, color)
 outputs[0].plot(y=["Cost"], ax=ax_combine, color='k', label=["Cost"])
 # plt.savefig("Dollar-Cost Averaging combine.png")
-plt.savefig("Dollar-Cost Averaging combine.pdf")
+plt.title(f"Dollar-Cost Averaging combine {interval.value}")
+plt.savefig(f"Dollar-Cost Averaging combine {interval.value}.pdf")
 
 
 # Create a separate figure for each plot
@@ -107,4 +108,5 @@ for i in range(len(outputs)):
     display_seprate(outputs[i], ax)
 
 # plt.savefig("Dollar-Cost Averaging separate.png")
-plt.savefig("Dollar-Cost Averaging separate.pdf")
+plt.title(f"Dollar-Cost Averaging separate {interval.value}")
+plt.savefig(f"Dollar-Cost Averaging separate {interval.value}.pdf")

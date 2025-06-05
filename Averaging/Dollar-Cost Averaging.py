@@ -12,13 +12,14 @@ class Interval(Enum):
     def __str__(self):
         return self.value
     
-start_date = "2018-12-01"
-end_date = "2024-12-01"
+start_date = "2022-12-01"
+end_date = "2025-12-01"
 interval = Interval.WEEKLY
 amount = 100
 outputs = []
-tickers = ["QQQ", "QLD", "TQQQ", "VOO", "SSO", "UPRO"]
+tickers = ["QQQ", "QLD", "TQQQ", "VOO", "UPRO", "BTC-USD"]
 export_csv = False
+export_json = False
 
 # Function to implement dollar-cost averaging
 # output layout:
@@ -57,6 +58,8 @@ def dollar_cost_averaging(ticker: str, start_date : str, end_date : str, interva
     output_name = start_date + "-" + end_date + " " +  ticker + " " + interval.value
     if(export_csv):
         output.to_csv(output_name + ".csv")
+    if(export_json):
+        output.to_json(output_name + ".json")
    
     output.Name = output_name
     return output
@@ -97,8 +100,8 @@ for output, color in zip(outputs, colors):
     display_combine(output, ax_combine, color)
 outputs[0].plot(y=["Cost"], ax=ax_combine, color='k', label=["Cost"])
 # plt.savefig("Dollar-Cost Averaging combine.png")
-plt.title(f"Dollar-Cost Averaging combine {interval.value}")
-plt.savefig(f"Dollar-Cost Averaging combine {interval.value}.pdf")
+plt.title(f"{start_date}--{end_date} Combine {interval.value}")
+plt.savefig(f"{start_date}--{end_date} Combine {interval.value}.pdf")
 
 
 # Create a separate figure for each plot
@@ -108,5 +111,4 @@ for i in range(len(outputs)):
     display_seprate(outputs[i], ax)
 
 # plt.savefig("Dollar-Cost Averaging separate.png")
-plt.title(f"Dollar-Cost Averaging separate {interval.value}")
-plt.savefig(f"Dollar-Cost Averaging separate {interval.value}.pdf")
+plt.savefig(f"{start_date}--{end_date} Separate  {interval.value}.pdf")
